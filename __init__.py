@@ -131,9 +131,6 @@ class KnxSkill(MycroftSkill):
            if value.valuetype == None:
               tunnel.group_write(parse_group_address(target), [value.value])
            elif value.valuetype == "num":
-              self.log.info ("Send default")
-              tunnel.group_write(parse_group_address(target), [value.value])
-           elif value.valuetype == "num":
               tunnel.group_write(parse_group_address(target), [value.value], 1)
            else:
               self.log.warning ("No valid type found")
