@@ -1,0 +1,15 @@
+{
+"aktiviere": "1",
+"deaktiviere": "0",
+" halb": "128|num",
+" hoch": "0|num",
+" rauf": "0|num",
+" auf": "0|num",
+" raus": "0|num",
+" rein": "255|num",
+" runter": "255|num",
+" zu": "255|num",
+" an": "1",
+" ein": "1",
+" aus": "0"
+}

@@ -1,0 +1,53 @@
+{
+    "esszimmer|essen|esstisch": "1/2/3",
+    "küche|kochen": {
+        "decke|default": "1/2/1",
+        "hof": "5/2/6",
+        "spot": "1/2/14"
+    },
+    "wohnzimmer|wohnen": "1/2/2",
+    "ankleide": "1/2/5",
+    "wirtschaft": "1/2/8",
+    "bad": {
+        "unteres|unten|default": {
+            "decke|default": "1/2/6",
+            "spiegel": "1/2/12"
+        },
+        "oberes|oben": {
+            "decke|default": "2/2/6",
+            "spiegel": "2/2/12"
+        }
+    },
+    "schlafzimmer": "1/2/4",
+    "gang|flur": {
+        "unten|untere|default": "1/2/7",
+        "spots|oben|obere": "2/2/20"
+    },
+    "treppe": "2/2/3",
+    "klo|wc": {
+        "unten|default": {
+            "spiegel|default": "1/2/11",
+            "decke": "1/2/9"
+        },
+    },
+    "florian": "2/2/4",
+    "johannes": "2/2/5",
+    "büro|spielzimmer|spielen": "2/2/7",
+    "gäste": "2/2/8",
+    "dach": "2/2/10",
+    "balkon": "2/2/11",
+    "heizraum": "2/2/2",
+    "werkstatt": "2/2/12",
+    "garage": {
+        "vorne|vorderes|default": "3/2/1",
+        "hinten|hinteres": "3/2/2"
+    },
+    "carport": "5/2/7",
+    "aussen": {
+        "wirtschaft": "5/2/3",
+        "schlafzimmer": "5/2/4",
+        "küche": "5/2/5",
+        "wohnen|wohnzimmer": "5/2/2"
+    },
+    "terasse": "5/2/2"
+}

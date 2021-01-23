@@ -1,0 +1,18 @@
+{
+    "esszimmer|essen|esstisch": "1/1/8",
+    "küche|kochen": "1/1/9",
+    "wohnen|wohnzimmer": {
+        "sofa": "1/1/5",
+        "fernseher|media|default": "1/1/4"
+    },
+    "schlafen|schlafzimmer": {
+        "bett|default": "1/1/13"
+    },
+    "flur|gang": "1/1/12",
+    "carport": "3/1/1",
+    "aussen": {
+        "wirtschaft": "5/1/1"
+    },
+    "terrasse": "5/1/2",
+    "balkon": "2/1/2"
+}
