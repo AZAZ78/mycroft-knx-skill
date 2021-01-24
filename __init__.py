@@ -1,5 +1,6 @@
 #Import mycroft integration
 from adapt.intent import IntentBuilder
+from adapt.engine import IntentDeterminationEngine
 from mycroft.skills.core import FallbackSkill
 from mycroft.util.format import nice_number
 from mycroft import MycroftSkill, intent_file_handler, intent_handler
@@ -59,6 +60,23 @@ class KnxSkill(MycroftSkill):
             self._blind_entities = yaml.safe_load(self.settings.get('blind'))
             self._special_entities = yaml.safe_load(self.settings.get('special'))
             self._actions = yaml.safe_load(self.settings.get('actions'))
+            self._register_special_intent(self._special_entities)
+
+    def _register_special_intent(self, entities):
+        if entities is None:
+            return
+
+        for keys, value in entities.items():
+            for key in keys.split("|"):
+                if key != "Default":
+                    self.register_vocabulary(key, "knx.special")
+
+        special_intent = IntentBuilder("SpecialIntent")\
+            .require("knx.special")\
+            .require("knx.action")\
+            .build()
+
+        self.register_intent(special_intent, self.handle_knx_special)
 
     def initialize(self):
         self.language = self.config_core.get('lang')
@@ -100,9 +118,6 @@ class KnxSkill(MycroftSkill):
         self.log.info ("Utterance: {}".format(utterance))
         self._handle_knx(utterance, self._plug_entities, self._actions)
 
-    @intent_handler(IntentBuilder("SpecialIntent")
-                              .require("knx.special")
-                              .require("knx.action"))
     def handle_knx_special(self, message):
         self.log.info ("Handle special intent")
         utterance = message.data.get('utterance')
