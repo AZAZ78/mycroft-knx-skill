@@ -149,10 +149,10 @@ class KnxSkill(MycroftSkill):
               tunnel.group_write(parse_group_address(target), [value.value], 1)
            else:
               self.log.warning ("No valid type found")
-           tunnel.disconnect()
         except:
            self.log.warning ("Error sending data")
            return False
+        tunnel.disconnect()
         return True
 
     def _get_target(self, text, entities):
