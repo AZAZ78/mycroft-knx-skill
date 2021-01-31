@@ -150,8 +150,8 @@ class KnxSkill(MycroftSkill):
               ret = True
            else:
               self.log.warning ("No valid type found")
-        except:
-           self.log.warning ("Error sending data")
+        except ex:
+           self.log.warning ("Error sending data: {}".format(ex))
         tunnel.disconnect()
         return ret
 
