@@ -46,7 +46,6 @@ class KnxSkill(MycroftSkill):
             try:
                 port = int(portnum)
             except:
-                # String might be some rubbish (like '')
                 self.log.error ("portnum is not defined or invalid")
                 self.speak_dialog('knx.error.setup', data={
                               "field": "portnum"})
@@ -60,7 +59,6 @@ class KnxSkill(MycroftSkill):
             self._blind_entities = yaml.safe_load(self.settings.get('blind'))
             self._special_entities = yaml.safe_load(self.settings.get('special'))
             self._actions = yaml.safe_load(self.settings.get('actions'))
-            self._register_special_intent(self._special_entities)
 
     def _register_special_intent(self, entities):
         if entities is None:
@@ -80,11 +78,11 @@ class KnxSkill(MycroftSkill):
 
     def initialize(self):
         self.language = self.config_core.get('lang')
-        #self.load_vocab_files(join(dirname(__file__), 'vocab', self.lang))
-
         # Check and then monitor for credential changes
         self.settings_change_callback = self.on_websettings_changed
         self._setup()
+        # Trigger for specials is only updated after restart, but no glue how to update it
+        self._register_special_intent(self._special_entities)
         
     def on_websettings_changed(self):
         # Force a setting refresh after the websettings changed
@@ -133,6 +131,7 @@ class KnxSkill(MycroftSkill):
            self.speak_dialog('knx.error')
 
     def _send_value(self, target, value):
+        ret = False
         self.log.info ("Send {} to {}".format(value, target))
         if target is None:
            self.log.warning ("No target found")
@@ -145,15 +144,16 @@ class KnxSkill(MycroftSkill):
            tunnel.connect()
            if value.valuetype == None:
               tunnel.group_write(parse_group_address(target), [value.value])
+              ret = True
            elif value.valuetype == "num":
               tunnel.group_write(parse_group_address(target), [value.value], 1)
+              ret = True
            else:
               self.log.warning ("No valid type found")
         except:
            self.log.warning ("Error sending data")
-           return False
         tunnel.disconnect()
-        return True
+        return ret
 
     def _get_target(self, text, entities):
         default = None
