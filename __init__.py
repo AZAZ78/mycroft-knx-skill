@@ -41,7 +41,7 @@ class KnxSkill(MycroftSkill):
                 self.log.error ("host is not defined")
                 self.speak_dialog('knx.error.setup', data={
                               "field": "host"})
-                return
+                return False
 
             try:
                 port = int(portnum)
@@ -49,7 +49,7 @@ class KnxSkill(MycroftSkill):
                 self.log.error ("portnum is not defined or invalid")
                 self.speak_dialog('knx.error.setup', data={
                               "field": "portnum"})
-                return
+                return False
 
             self.log.info ("create new tunnel to {}:{}".format(ip, port))
             self._knx_tunnel = KNXIPTunnel(ip, port)
@@ -59,6 +59,8 @@ class KnxSkill(MycroftSkill):
             self._blind_entities = yaml.safe_load(self.settings.get('blind'))
             self._special_entities = yaml.safe_load(self.settings.get('special'))
             self._actions = yaml.safe_load(self.settings.get('actions'))
+            
+            return True
 
     def _register_special_intent(self, entities):
         if entities is None:
@@ -80,9 +82,9 @@ class KnxSkill(MycroftSkill):
         self.language = self.config_core.get('lang')
         # Check and then monitor for credential changes
         self.settings_change_callback = self.on_websettings_changed
-        self._setup()
-        # Trigger for specials is only updated after restart, but no glue how to update it
-        self._register_special_intent(self._special_entities)
+        if self._setup() is True
+            # Trigger for specials is only updated after restart, but no glue how to update it
+            self._register_special_intent(self._special_entities)
         
     def on_websettings_changed(self):
         # Force a setting refresh after the websettings changed
