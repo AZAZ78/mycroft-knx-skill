@@ -23,7 +23,15 @@ Productivity
 #Smart home
 
 ## Installation and Configuration
-tbd
+The original pknx implementation has an issue with clean closing of tunnels. It should work with the modified version at https://github.com/AZAZ78/pknx/blob/master/dist/knxip-0.5.tar.gz
+Installation of pknx:
+- Download knxip-0.5.tar.gz: wget https://github.com/AZAZ78/pknx/blob/master/dist/knxip-0.5.tar.gz
+- Install with pip: pip install knxip-0.5.tar.gz
+
+Installation of mycroft-knx-skill
+- mycroft-msm install https://github.com/AZAZ78/mycroft-knx-skill.git
+
+Configure skill in https://account.mycroft.ai/skills
 
 ## Usage
 tbd
